@@ -35,7 +35,6 @@ db.connect((err) => {
   }
 });
 
-// Login route
 // app.post('/login', (req, res) => {
 //   const { username, password } = req.body;
 //   console.log(`Received login attempt with username: ${username}, password: ${password}`);
@@ -44,17 +43,15 @@ db.connect((err) => {
 //   const query = 'SELECT * FROM users WHERE username = ? AND password = ?';
 //   db.query(query, [username, password], (err, results) => {
 //     if (err) {
-//             res.json({ success: false, message: 'Internal server error' });
-
+//       console.error('Error executing SQL query:', err);
+//       return res.status(500).json({ success: false, message: 'Internal server error' });
 //     } else if (results.length > 0) {
-//       res.json({ success: true, message: 'Login successful!' });
+//       return res.json({ success: true, message: 'Login successful!' });
 //     } else {
-//                   res.json({ success: false, message: 'Invalid username or password' });
-
+//       return res.status(401).json({ success: false, message: 'Invalid username or password' });
 //     }
 //   });
 // });
-// In your login route handler
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
   console.log(`Received login attempt with username: ${username}, password: ${password}`);
@@ -72,8 +69,6 @@ app.post('/login', (req, res) => {
     }
   });
 });
-
-
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"));
 });
