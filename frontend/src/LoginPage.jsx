@@ -26,9 +26,9 @@ function LoginPage() {
 const handleLogin = (e) => {
   e.preventDefault();
   const loginData = { username, password };
-
+console.log({username,password});
   axios
-    .post('/login', loginData)
+    .post('http://localhost:5000/login', loginData)
     .then((res) => {
       if (res.data.success) {
         setMessage(res.data.message);
